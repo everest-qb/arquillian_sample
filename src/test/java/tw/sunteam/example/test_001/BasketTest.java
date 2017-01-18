@@ -17,10 +17,10 @@ import tw.sunteam.example.test_001.Basket;
 import tw.sunteam.example.test_001.OrderRepository;
 import tw.sunteam.example.test_001.SingletonOrderRepository;
 
-//@RunWith(Arquillian.class)
+@RunWith(Arquillian.class)
 public class BasketTest {
 
-	//@Deployment
+	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
 				.addClasses(Basket.class, OrderRepository.class, SingletonOrderRepository.class)
@@ -33,8 +33,8 @@ public class BasketTest {
 	@EJB
 	OrderRepository repo;
 
-	//@Test
-	//@InSequence(1)
+	@Test
+	@InSequence(1)
 	public void place_order_should_add_order() {
 		basket.addItem("sunglasses");
 		basket.addItem("suit");
@@ -49,8 +49,8 @@ public class BasketTest {
 		Assert.assertEquals(0, basket.getItemCount());
 	}
 
-	//@Test
-	//@InSequence(2)
+	@Test
+	@InSequence(2)
 	public void order_should_be_persistent() {
 		Assert.assertEquals(2, repo.getOrderCount());
 	}
